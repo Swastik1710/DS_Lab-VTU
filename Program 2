@@ -10,60 +10,49 @@ Built-in functions.
 */
 
 #include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-
-void findandreplace(char string[100],char pattern[20], char replace[20])
+char str[50], pat[20], rep[20], ans[50];
+int     c=0, m=0, i=0, j=0, k, flag=0;
+void stringmatch()
 {
-    char result[100];
-    int stringindex,patternindex,resultindex,c=0,k,found=0;
-    stringindex=patternindex=resultindex=0;
-    while(string[c]!='\0') 
-    {
-        if(string[stringindex]==pattern[patternindex])
-        {
-            stringindex++;
-            patternindex++;
-            if(pattern[patternindex]=='\0')
-            {
-              for(k=0;replace[k]!='\0';k++,resultindex++) 
-              result[resultindex]=replace[k];
-              patternindex=0;
-              c=stringindex;
-            }
-        }
-        else
-        {
-        result[resultindex]=string[c];
-        resultindex++;
-        c++;
-        stringindex=c;
-        patternindex=0;
-        }
-       
-     
-    }
-    result[resultindex]='\0';
-    if(found>0)
-    {
-      printf("we found the pattern %d times\n",found);
-    }
-    else
-    {
-      printf("pattern is not found\n");
-    }
-    printf("resultant string\n");
-    puts(result);
+                 while(str[c] !='\0')
+                {
+                                if(str[m] == pat[i])
+                                {
+                                                i++;
+                                                m++;
+                                                if(pat[i] == '\0')
+                                                {             
+                                                                flag = 1;
+                                                                for(k=0; rep[k]!='\0'; k++, j++)
+                                                                {
+                                                                                ans[j] = rep[k];
+                                                                }
+                                                                i = 0;
+                                                                c = m;
+                                                }
+                                }
+                                else
+                                {
+                                                ans[j]= str[c];
+                                                j++;
+                                                c++;
+                                                m=c;
+                                                i=0;
+                                }
+                }
+                ans[j]='\0';
 }
-
 void main()
 {
-    char string[100],pattern[20],replace[20];
-    printf("Enter the string ");
-    gets(string);
-    printf("Enter the pattern ");
-    gets(pattern);
-    printf("replace string\t");
-    gets(replace);
-    findandreplace(string,pattern,replace);
+                printf("\nEnter the main string:");
+                gets(str);
+                printf("\nEnter the pat string:");
+                gets(pat);
+                printf("\nEnter the replace string:");
+                gets(rep);
+                stringmatch();
+                if(flag == 1)
+                                printf("\nResultant string is %s", ans);
+                else
+                                printf("\nPattern string is not found");
 }
