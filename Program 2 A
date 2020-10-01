@@ -1,0 +1,56 @@
+#include <stdio.h>
+char str[200],pat[200],rep[200];
+int slen=0,plen=0,rlen=0;
+void readstr()
+{
+    int i,j,k;
+    printf("Enter string: ");
+    gets(str);
+    printf("Enter pattern: ");
+    gets(pat);
+    printf("Enter string to be replaced: ");
+    gets(rep);
+    for(i=0;pat[i]!='\0';i++);
+    plen=i;
+    for(j=0;str[j]!='\0';j++);
+    slen=j;
+    for(k=0;rep[k]!='\0';k++);
+    rlen=k;
+}
+
+void patn()
+{
+    char fstr[100];
+    int i,j,k,z=0,ct=0;
+    for(i=0;i<slen;i++)
+    {
+        j=0;
+        while(str[i+j]==pat[j] && j<plen)
+        j++;
+        if(pat[j]=='\0')
+        {
+            ct++;
+            for(k=0;k<rlen;k++,z++)
+            fstr[z]=rep[k];
+            i+=plen-1;
+        }
+        else
+        {
+            fstr[z]=str[i];
+            z++;
+        }
+    }
+    if(ct==0)
+    printf("Patern not found !!!");
+    else
+    {
+        fstr[z]='\0';
+        printf("Occurences : %d\nFinal String: %s\n",ct, fstr);
+    }
+}
+int main()
+{
+    readstr();
+    patn();
+    return 0;
+}
