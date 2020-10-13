@@ -1,0 +1,106 @@
+/*
+Design, Develop and Implement a Program in C for converting an Infix Expression
+to Postfix Expression. Program should support for both parenthesized and free
+parenthesized expressions with the operators: +, -, *, /, %(Remainder), ^(Power)
+and alphanumeric operands.
+*/
+
+#include<stdio.h>
+char a[25];
+int top=-1;
+void push(char symbol)
+{
+    a[++top]=symbol;
+}
+char pop()
+{
+    char item;
+    item=a[top--];
+    return(item);
+}
+int precd(char op)
+{
+    int r;
+    switch(op)
+    {
+    case '^':
+        r=3;
+        break;
+    case '*':
+    case '/':
+    case '%':
+        r=2;
+        break;
+    case '+':
+    case '-':
+        r=1;
+        break;
+    case '(':
+        r=0;
+        break;
+    case '#':
+        r=-1;
+        break;
+    }
+    return(r);
+}
+void infix_postfix(char infix[],char postfix[])
+{
+    int i,p=0;
+    char symbol,item;
+    push('#');
+    for (i=0; infix[i]!='\0'; i++)
+    {
+        symbol=infix[i];
+        switch(symbol)
+        {
+        case '(':
+            push(symbol);
+            break;
+        case ')':
+            item=pop();
+            if(item!='(')
+            {
+
+                postfix[p++]=item;
+                item=pop(); 
+            }
+            break;
+        case '+':
+        case '-':
+        case '*':
+        case '/':
+        case '^':
+        case '%':
+
+
+            if(precd(a[top])>=precd(symbol)) /*if the precedence of the operator being pushed is 
+                                                less than or equal the one alerady inside */
+            {
+                item=pop();
+                postfix[p++]=item;
+            }
+            push(symbol);
+            break;
+
+
+        default:
+            postfix[p++]=symbol;// if a not an operator put the number in postfix array
+
+        }
+    }
+    while(top>0)
+    {
+        item=pop();
+        postfix[p++]=item;
+    }
+    postfix[p]='\0';
+}
+void main()
+{
+    char infix[25],postfix[25];
+    printf("Enter the Infix Expression:\n");
+    scanf("%s",infix);
+    infix_postfix(infix,postfix);
+    printf("Postfix Expression: %s\n",postfix);
+}
