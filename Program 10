@@ -110,10 +110,10 @@ void main()
     NODE root = NULL, newnode;
     while(1)
         {
-            printf("\n~~~~BST MENU~~~~");
+            printf("\n--BST MENU--");
             printf("\n1.Create a BST");
-            printf("\n2.Search");
-            printf("\n3.BST Traversals: ");
+            printf("\n2.BST Traversals: ");
+            printf("\n3.Search");
             printf("\n4.Exit");
             printf("\nEnter your choice: ");
             scanf("%d", &ch);
