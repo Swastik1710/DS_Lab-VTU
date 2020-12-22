@@ -114,7 +114,7 @@ POLYNOMIAL sum_polynomial ( POLYNOMIAL head1, POLYNOMIAL head2, POLYNOMIAL head3
   p2 = head2->link;
   while ( p2 != head2 )
   {
-    if ( p2->coeff != 0 ) /*Check for left out plolynomial's in polynomial2.*/
+    if ( p2->coeff != 0 ) 
     head3 = insert_end ( head3, p2->coeff, p2->x, p2->y, p2->z ); 
     p2 = p2->link;
   }
